@@ -25,10 +25,24 @@ roomba.name = "Roku";
 roomba.versionNumber = 770;
 roomba.errorCodes = ["Pass", "Fail"];
 
+roomba.setChargeLevel = function (chargeLevel: Number) {
+	roomba.chargeLevel = chargeLevel;
+}
+
 roomba.roomCleanTime = function (room: Object) {
 	return (room.feetSquared * furnitureCount) / 3;
 }
 
-roomba.cleanRooms = function () {
+roomba.getFullName = function () {
+	return roomba.name + " " + roomba.versionNumber;
+}
 
+roomba.cleanRooms = function () {
+	roomsCleaned = 0;
+	while (roomsCleaned < rooms.length) {
+		console.log(roomba.getFullName() + " is about to start cleaning!!!");
+
+		console.log(roomba.getFullName() + " finished cleaing all the rooms!!!");
+		++roomsCleaned;
+	}
 };
