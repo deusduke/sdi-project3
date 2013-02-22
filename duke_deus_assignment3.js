@@ -24,6 +24,12 @@ roomba.roomsToClean = rooms;
 roomba.name = "Roku";
 roomba.versionNumber = 770;
 roomba.errorCodes = ["Pass", "Fail"];
+roomba.chargeLevel = 100;
+roomba.greetings = [
+		"Hello there!",
+		"Good morning!",
+		"Howdy!"
+	];
 
 roomba.setChargeLevel = function (chargeLevel: Number) {
 	roomba.chargeLevel = chargeLevel;
@@ -37,7 +43,20 @@ roomba.getFullName = function () {
 	return roomba.name + " " + roomba.versionNumber;
 }
 
+roomba.fullyCharged = function () {
+	return roomba.chargeLevel >= 100;
+}
+
+roomba.getGreetings = function () {
+	return roomba.greetings;
+}
+
 roomba.cleanRooms = function () {
+	// print a random greeting
+	arrGreetings = roomba.getGreetings();
+	var randomNumber = Math.floor((Math.random()*arrGreetings.length)+1);
+	console.log(roomba.getFullName() " would like to say: " + arrGreetings[randomNumber]);
+
 	currentRoom = 0;
 	console.log(roomba.getFullName() + " is about to start cleaning!!!");
 
@@ -48,6 +67,9 @@ roomba.cleanRooms = function () {
 			console.log("This room also has a lot of furniture, this might take a while");
 		}
 	}
+
+	else
+		console.log("This is a reasonable sized room");
 
 	console.log("It will take " + roomba.roomCleanTime(rooms[currentRoom]) + " minutes to clean this room");
 
@@ -65,3 +87,7 @@ roomba.cleanRooms = function () {
 
 	console.log(roomba.getFullName() + " finished cleaing all the rooms!!!");
 };
+
+roomba.setChargeLevel(75);
+
+console.log("My roomba name is " + roomba.getFullName());
