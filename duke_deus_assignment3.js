@@ -3,12 +3,6 @@
 // Project 3
 // Third project for SDI at Full Sail University
 
-
-var room = {
-	feetSquare: 12,		// square footage
-	furnitureCount: 4	// items of funiture in the room
-};
-
 var rooms = {
 	{"feetSquared": "12", "furnitureCount": "4"},
 	{"feetSquared": "25", "furnitureCount": "8"},
@@ -32,7 +26,7 @@ roomba.greetings = [
 	];
 
 roomba.setChargeLevel = function (chargeLevel: Number) {
-	roomba.chargeLevel = chargeLevel;
+	this.chargeLevel = chargeLevel;
 }
 
 roomba.roomCleanTime = function (room: Object) {
@@ -40,25 +34,29 @@ roomba.roomCleanTime = function (room: Object) {
 }
 
 roomba.getFullName = function () {
-	return roomba.name + " " + roomba.versionNumber;
+	return this.name + " " + this.versionNumber;
 }
 
 roomba.fullyCharged = function () {
-	return roomba.chargeLevel >= 100;
+	return this.chargeLevel >= 100;
 }
 
 roomba.getGreetings = function () {
-	return roomba.greetings;
+	return this.greetings;
+}
+
+roomba.getRandomGreeting = function () {
+	return
 }
 
 roomba.cleanRooms = function () {
 	// print a random greeting
-	arrGreetings = roomba.getGreetings();
+	arrGreetings = this.getGreetings();
 	var randomNumber = Math.floor((Math.random()*arrGreetings.length)+1);
-	console.log(roomba.getFullName() " would like to say: " + arrGreetings[randomNumber]);
+	console.log(this.getFullName() " would like to say: " + arrGreetings[randomNumber]);
 
 	currentRoom = 0;
-	console.log(roomba.getFullName() + " is about to start cleaning!!!");
+	console.log(this.getFullName() + " is about to start cleaning!!!");
 
 	if (rooms[currentRoom].feetSquared > 15) {
 		console.log("This is a large room");
@@ -71,7 +69,7 @@ roomba.cleanRooms = function () {
 	else
 		console.log("This is a reasonable sized room");
 
-	console.log("It will take " + roomba.roomCleanTime(rooms[currentRoom]) + " minutes to clean this room");
+	console.log("It will take " + this.roomCleanTime(rooms[currentRoom]) + " minutes to clean this room");
 
 	// clean all the rooms
 	while (roomsCleaned < rooms.length) {
@@ -85,9 +83,9 @@ roomba.cleanRooms = function () {
 		++currentRoom;
 	}
 
-	console.log(roomba.getFullName() + " finished cleaing all the rooms!!!");
+	console.log(this.getFullName() + " finished cleaing all the rooms!!!");
 };
 
 roomba.setChargeLevel(75);
-
 console.log("My roomba name is " + roomba.getFullName());
+roomba.cleanRooms();
