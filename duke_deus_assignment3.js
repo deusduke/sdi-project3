@@ -38,11 +38,30 @@ roomba.getFullName = function () {
 }
 
 roomba.cleanRooms = function () {
-	roomsCleaned = 0;
-	while (roomsCleaned < rooms.length) {
-		console.log(roomba.getFullName() + " is about to start cleaning!!!");
+	currentRoom = 0;
+	console.log(roomba.getFullName() + " is about to start cleaning!!!");
 
-		console.log(roomba.getFullName() + " finished cleaing all the rooms!!!");
-		++roomsCleaned;
+	if (rooms[currentRoom].feetSquared > 15) {
+		console.log("This is a large room");
+
+		if (rooms[currentRoom].furnitureCount) > 4) {
+			console.log("This room also has a lot of furniture, this might take a while");
+		}
 	}
+
+	console.log("It will take " + roomba.roomCleanTime(rooms[currentRoom]) + " minutes to clean this room");
+
+	// clean all the rooms
+	while (roomsCleaned < rooms.length) {
+		for (int i = 0; i < rooms[currentRoom].furnitureCount; ++i) {
+			console.log("Cleaning under furniture number " +
+				rooms[currentRoom].furnitureCount + " for room " + currentRoom);
+		}
+
+		console.log("Finished cleaning room " + currentRoom);
+
+		++currentRoom;
+	}
+
+	console.log(roomba.getFullName() + " finished cleaing all the rooms!!!");
 };
